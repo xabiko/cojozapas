@@ -1,53 +1,57 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Injectable }               from '@angular/core';
+import { Http, Response }           from '@angular/http';
+import { Headers, RequestOptions }  from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+
+import { Zapa } from './zapa'
 
 @Injectable()
 export class Reviews {
+  private zapasUrl = 'http://localhost:8080/api/reviews/';
 
-  data: any[] = [];
+  constructor(private http: Http) {}
 
-  constructor(public http: Http) {
-    this.data = null;
+  getReviews(): Observable<Zapa[]> {
+      return this.http.get(this.zapasUrl)
+                      .map(this.extractData)
+                      .catch(this.handleError);
   }
 
-  getReviews(){
+  createReview(review): Observable<Zapa> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({headers: headers});
 
-    if (this.data) {
-      return Promise.resolve(this.data);
+    return this.http.post(this.zapasUrl, JSON.stringify(review), options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  deleteReview(id): Observable<Zapa[]>{
+    return this.http.delete(this.zapasUrl + id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body || { };
+  }
+
+  private handleError (error: Response | any) {
+    // In a real world app, you might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
     }
-
-    return new Promise(resolve => {
-
-      this.http.get('http://localhost:8080/api/reviews')
-        .map(res => res.json())
-        .subscribe(data => {
-          this.data = data;
-          resolve(this.data);
-        });
-    });
-
-  }
-
-  createReview(review){
-
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    this.http.post('http://localhost:8080/api/reviews', JSON.stringify(review), {headers: headers})
-      .subscribe(res => {
-        console.log(res.json());
-        this.data.push(res.json()); //This used to be in the home page
-      });
-
-  }
-
-  deleteReview(id){
-
-    this.http.delete('http://localhost:8080/api/reviews/' + id).subscribe((res) => {
-      console.log(res.json());
-    });
-
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
 
 }

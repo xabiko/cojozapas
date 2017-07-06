@@ -1,27 +1,30 @@
-import { Component } from "@angular/core";
+import { Component }      from "@angular/core";
 import { NavController, ModalController } from 'ionic-angular';
-import { AddReviewPage } from '../add-review/add-review';
-import { Reviews } from '../../providers/reviews/reviews';
+import { AddReviewPage }  from '../add-review/add-review';
+import { Zapa }           from '../../providers/reviews/zapa';
+import { Reviews }        from '../../providers/reviews/reviews';
 
 @Component({
   selector: 'home-page',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [ Reviews ]
 })
 export class HomePage {
+  errorMessage: string;
+  reviews: Zapa[];
+  mode = 'Observable';
 
-  reviews: any[] = [];
-
-  constructor(public nav: NavController, public reviewService: Reviews, public modalCtrl: ModalController) {
-
-  }
+  constructor(public nav: NavController,
+              private reviewService: Reviews,
+              public modalCtrl: ModalController) {}
 
   ionViewDidLoad(){
 
-    this.reviewService.getReviews().then((data) => {
-      console.log(data);
-      this.reviews = data;
-    });
-
+    this.reviewService.getReviews()
+                      .subscribe(
+                        data  => this.reviews = data,
+                        //data  => console.log(data),
+                        error => this.errorMessage = <any>error);
   }
 
   addReview(){
@@ -31,7 +34,10 @@ export class HomePage {
     modal.onDidDismiss(review => {
       if(review){
         //this.reviews.push(review);
-        this.reviewService.createReview(review);
+        this.reviewService.createReview(review)
+                          .subscribe(
+                            data  => this.reviews.push(data),
+                            error => this.errorMessage = <any>error);
       }
     });
 
@@ -49,7 +55,9 @@ export class HomePage {
       }
 
     //Remove from database
-    this.reviewService.deleteReview(review._id);
+    this.reviewService.deleteReview(review._id)
+                      .subscribe(
+                        data => console.log(data));
   }
 
 }
