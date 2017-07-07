@@ -58628,10 +58628,9 @@ AddReviewPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'add-review-page',template:/*ion-inline-start:"/home/javijupra/repos/ionic/review-king/src/pages/add-review/add-review.html"*/'<ion-header>\n <ion-toolbar transparent>\n  <ion-title>Add Review</ion-title>\n  <ion-buttons end>\n    <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>\n  </ion-buttons>\n </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-list no-lines>\n\n    <ion-item>\n      <ion-label floating>Title</ion-label>\n      <ion-input [(ngModel)]="title" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Review</ion-label>\n      <ion-textarea [(ngModel)]="description"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-range min="0" max="100" pin="true" [(ngModel)]="rating">\n        <ion-icon range-left name="sad"></ion-icon>\n        <ion-icon range-right name="happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n  </ion-list>\n\n  <button ion-button full color="secondary" (click)="save()">Save</button>\n\n</ion-content>\n'/*ion-inline-end:"/home/javijupra/repos/ionic/review-king/src/pages/add-review/add-review.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */]])
 ], AddReviewPage);
 
-var _a;
 //# sourceMappingURL=add-review.js.map
 
 /***/ }),
@@ -58678,7 +58677,7 @@ var HomePage = (function () {
             if (review) {
                 //this.reviews.push(review);
                 _this.reviewService.createReview(review)
-                    .subscribe(function (data) { return _this.reviews.push(data); }, function (error) { return _this.errorMessage = error; });
+                    .subscribe(function (data) { return _this.reviews.unshift(data); }, function (error) { return _this.errorMessage = error; });
             }
         });
         modal.present();
@@ -58700,11 +58699,10 @@ HomePage = __decorate([
         selector: 'home-page',template:/*ion-inline-start:"/home/javijupra/repos/ionic/review-king/src/pages/home/home.html"*/'<ion-header>\n <ion-navbar transparent>\n  <ion-title>\n    Review King\n  </ion-title>\n  <ion-buttons end>\n    <button ion-button icon-only (click)="addReview()"><ion-icon name="add"></ion-icon></button>\n  </ion-buttons>\n </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-list no-lines>\n\n    <ion-item-sliding *ngFor="let review of reviews">\n\n      <ion-item>\n\n        <ion-avatar item-left>\n          <img src="https://api.adorable.io/avatars/75/{{review.title}}">\n        </ion-avatar>\n\n        <h2>{{review.title}}</h2>\n        <p>{{review.description}}</p>\n\n        <ion-icon *ngIf="review.rating < 50" danger name="sad"></ion-icon>\n        <ion-icon *ngIf="review.rating >= 50" secondary name="happy"></ion-icon>\n        {{review.rating}}\n\n      </ion-item>\n\n      <ion-item-options>\n        <button ion-button color="danger" (click)="deleteReview(review)">\n          <ion-icon name="trash"></ion-icon>\n          Delete\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/home/javijupra/repos/ionic/review-king/src/pages/home/home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_3__providers_reviews_reviews__["a" /* Reviews */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_reviews_reviews__["a" /* Reviews */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ModalController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_reviews_reviews__["a" /* Reviews */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_reviews_reviews__["a" /* Reviews */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ModalController */]) === "function" && _c || Object])
 ], HomePage);
 
+var _a, _b, _c;
 //# sourceMappingURL=home.js.map
 
 /***/ }),

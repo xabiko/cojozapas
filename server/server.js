@@ -38,7 +38,7 @@ var Review = mongoose.model('Review', {
     app.get('/api/reviews', function(req, res) {
         console.log("fetching reviews");
         // use mongoose to get all reviews in the database
-        Review.find({},function(err, reviews) {
+        Review.find({}).sort('-time').exec(function(err, reviews) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 res.send(err)

@@ -36,7 +36,7 @@ export class HomePage {
         //this.reviews.push(review);
         this.reviewService.createReview(review)
                           .subscribe(
-                            data  => this.reviews.push(data),
+                            data  => this.reviews.unshift(data),
                             error => this.errorMessage = <any>error);
       }
     });
