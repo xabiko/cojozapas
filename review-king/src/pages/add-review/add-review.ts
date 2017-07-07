@@ -20,7 +20,8 @@ export class AddReviewPage {
     let review = {
       title: this.title,
       description: this.description,
-      rating: this.rating
+      rating: this.rating,
+      time : new Date(),
     };
 
     this.viewCtrl.dismiss(review);

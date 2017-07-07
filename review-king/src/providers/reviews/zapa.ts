@@ -2,5 +2,6 @@ export class Zapa {
   constructor(
     public title: string,
     public description: string,
-    public rating: number) { }
+    public rating: number,
+    public time: Date,) { }
 }

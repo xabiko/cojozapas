@@ -58614,7 +58614,8 @@ var AddReviewPage = (function () {
         var review = {
             title: this.title,
             description: this.description,
-            rating: this.rating
+            rating: this.rating,
+            time: new Date(),
         };
         this.viewCtrl.dismiss(review);
     };
@@ -58627,9 +58628,10 @@ AddReviewPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'add-review-page',template:/*ion-inline-start:"/home/javijupra/repos/ionic/review-king/src/pages/add-review/add-review.html"*/'<ion-header>\n <ion-toolbar transparent>\n  <ion-title>Add Review</ion-title>\n  <ion-buttons end>\n    <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>\n  </ion-buttons>\n </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-list no-lines>\n\n    <ion-item>\n      <ion-label floating>Title</ion-label>\n      <ion-input [(ngModel)]="title" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Review</ion-label>\n      <ion-textarea [(ngModel)]="description"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-range min="0" max="100" pin="true" [(ngModel)]="rating">\n        <ion-icon range-left name="sad"></ion-icon>\n        <ion-icon range-right name="happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n  </ion-list>\n\n  <button ion-button full color="secondary" (click)="save()">Save</button>\n\n</ion-content>\n'/*ion-inline-end:"/home/javijupra/repos/ionic/review-king/src/pages/add-review/add-review.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ViewController */]) === "function" && _a || Object])
 ], AddReviewPage);
 
+var _a;
 //# sourceMappingURL=add-review.js.map
 
 /***/ }),

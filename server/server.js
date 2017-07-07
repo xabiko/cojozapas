@@ -29,6 +29,7 @@ var Review = mongoose.model('Review', {
     title: String,
     description: String,
     rating: Number,
+    time: Date,
 });
 
 // Routes
@@ -53,7 +54,7 @@ var Review = mongoose.model('Review', {
             title : req.body.title,
             description : req.body.description,
             rating: req.body.rating,
-            done : false
+            time : req.body.time,
         }, function(err, review) {
             if (err)
                 res.send(err);
