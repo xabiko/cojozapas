@@ -1,6 +1,8 @@
 // Set up
-var express  = require('express');
-var app      = express();                               // create our app w/ express
+var app = require('express')();
+var server = app.listen(8080);
+var io = require('socket.io')(server);
+
 var mongoose = require('mongoose');                     // mongoose for mongodb
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
@@ -83,6 +85,19 @@ var Review = mongoose.model('Review', {
     });
 
 
+    io.on('connection', (socket) => {
+      console.log('USER CONNECTED');
+
+      socket.on('disconnect', function(){
+        console.log('USER DISCONNECTED');
+      });
+
+      socket.on('add-message', (message) => {
+        io.emit('message', {type:'new-message', text: message});
+      });
+    });
+
+
 // listen (start app with node server.js) ======================================
-app.listen(8080);
+//app.listen(8080);
 console.log("App listening on port 8080");

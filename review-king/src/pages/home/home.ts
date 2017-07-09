@@ -1,6 +1,7 @@
 import { Component }      from "@angular/core";
 import { NavController, ModalController } from 'ionic-angular';
 import { AddReviewPage }  from '../add-review/add-review';
+import { ChatPage }  from '../chat/chat';
 import { Zapa }           from '../../providers/reviews/zapa';
 import { Reviews }        from '../../providers/reviews/reviews';
 
@@ -58,6 +59,10 @@ export class HomePage {
     this.reviewService.deleteReview(review._id)
                       .subscribe(
                         data => console.log(data));
+  }
+
+  goToChat(){
+    this.nav.push(ChatPage);
   }
 
 }

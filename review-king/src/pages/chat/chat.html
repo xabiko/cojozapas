@@ -1,0 +1,22 @@
+<ion-header>
+ <ion-navbar transparent>
+  <ion-title>
+    Chat
+  </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let message of messages">
+      {{message.text}}
+    </ion-item>
+</ion-content>
+
+<ion-footer keyboard-attach class="bar-stable item-input-inset">
+    <ion-item>
+      <ion-input placeholder="Send message..." [(ngModel)]="message" type="text"></ion-input>
+      <button ion-button item-right (click)="sendMessage()">
+        Send
+      </button>
+    </ion-item>
+</ion-footer>
