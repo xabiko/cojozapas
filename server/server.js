@@ -85,7 +85,8 @@ var Review = mongoose.model('Review', {
     });
 
 
-    io.on('connection', (socket) => {
+    var chat = io.of('/chat')
+      .on('connection', (socket) => {
       console.log('USER CONNECTED');
 
       socket.on('disconnect', function(){
@@ -93,7 +94,7 @@ var Review = mongoose.model('Review', {
       });
 
       socket.on('add-message', (message) => {
-        io.emit('message', {type:'new-message', text: message});
+        io.of('/chat').emit('message', {type:'new-message', text: message});
       });
     });
 

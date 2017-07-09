@@ -15,13 +15,13 @@ export class ChatPage implements OnInit, OnDestroy {
   constructor(private chatService: Chat) { }
 
     sendMessage() {
-      console.log(this.message)
       this.chatService.sendMessage(this.message);
       this.message = '';
     }
 
     ngOnInit() {
       this.connection = this.chatService.getMessages().subscribe(message => {
+        console.log(message);
         this.messages.push(message);
       })
     }
